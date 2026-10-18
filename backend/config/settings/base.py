@@ -46,7 +46,13 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_spectacular',
 
-    # Local apps will be registered in Step 4
+    # Local apps
+    'apps.core',
+    'apps.accounts',
+    'apps.locations',
+    'apps.turfs',
+    'apps.bookings',
+    'apps.payments',
 ]
 
 MIDDLEWARE = [
