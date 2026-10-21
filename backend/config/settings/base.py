@@ -96,6 +96,10 @@ DATABASES = {
     )
 }
 
+# Custom User Model
+# Informs Django auth framework to use our custom accounts.User model instead of default auth.User
+AUTH_USER_MODEL = 'accounts.User'
+
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
