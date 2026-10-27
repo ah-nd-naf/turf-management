@@ -1,22 +1,27 @@
 """
-URL configuration for config project.
+URL configuration for Turf Management project.
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+API URL STRUCTURE:
+- /admin/                   Django Admin portal
+- /api/schema/              OpenAPI 3.0 schema generation endpoint (drf-spectacular)
+- /api/docs/                Interactive Swagger UI documentation
+- /api/v1/locations/        Division & District location endpoints (apps.locations)
+
+Accounts / Auth URLs will be wired in Step 7B.
 """
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
+    # Django Admin Site
     path('admin/', admin.site.urls),
+
+    # OpenAPI 3 Schema & Swagger UI Documentation
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+
+    # API v1 App Endpoints
+    path('api/v1/locations/', include('apps.locations.urls')),
 ]
