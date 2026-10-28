@@ -5,9 +5,8 @@ API URL STRUCTURE:
 - /admin/                   Django Admin portal
 - /api/schema/              OpenAPI 3.0 schema generation endpoint (drf-spectacular)
 - /api/docs/                Interactive Swagger UI documentation
+- /api/v1/auth/             Authentication endpoints (apps.accounts)
 - /api/v1/locations/        Division & District location endpoints (apps.locations)
-
-Accounts / Auth URLs will be wired in Step 7B.
 """
 
 from django.contrib import admin
@@ -23,5 +22,7 @@ urlpatterns = [
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 
     # API v1 App Endpoints
+    path('api/v1/auth/', include('apps.accounts.urls')),
     path('api/v1/locations/', include('apps.locations.urls')),
 ]
+
